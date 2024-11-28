@@ -14,7 +14,7 @@ public abstract class Square {
     protected final int index;
     public abstract boolean isOccupied();
     public abstract Piece getPiece();
-    private static final Map<Integer, EmptySquare> EMPTY_SQUARES = initializeEmptySquares();
+    private static final Map<Integer, EmptySquare> EMPTY_SQUARE_CACHE = initializeEmptySquares();
 
     private Square(int index) { this.index = index; }
 
@@ -29,12 +29,12 @@ public abstract class Square {
 
     // create a new occupied square or get the existing empty square
     public static Square createSquare(final int index, final Piece piece) {
-        return piece != null ? new OccupiedSquare(index, piece) : EMPTY_SQUARES.get(index);
+        return piece != null ? new OccupiedSquare(index, piece) : EMPTY_SQUARE_CACHE.get(index);
     }
 
     // empty square subclass
     public static final class EmptySquare extends Square {
-        EmptySquare(final int index) {
+        private EmptySquare(final int index) {
             super(index);
         }
         @Override
@@ -46,7 +46,7 @@ public abstract class Square {
     // occupied square subclass
     public static final class OccupiedSquare extends Square {
         private final Piece piece;
-        OccupiedSquare(int index, Piece piece) {
+        private OccupiedSquare(int index, Piece piece) {
             super(index);
             this.piece = piece;
         }
