@@ -16,7 +16,7 @@ public abstract class Square {
     public abstract Piece getPiece();
     private static final Map<Integer, EmptySquare> EMPTY_SQUARE_CACHE = initializeEmptySquares();
 
-    private Square(int index) { this.index = index; }
+    private Square(final int index) { this.index = index; }
 
     // create an immutable hashmap of empty squares
     private static Map<Integer, EmptySquare> initializeEmptySquares() {
@@ -46,7 +46,7 @@ public abstract class Square {
     // occupied square subclass
     public static final class OccupiedSquare extends Square {
         private final Piece piece;
-        private OccupiedSquare(int index, Piece piece) {
+        private OccupiedSquare(int index, final Piece piece) {
             super(index);
             this.piece = piece;
         }
