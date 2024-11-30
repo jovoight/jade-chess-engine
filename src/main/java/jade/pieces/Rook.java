@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Bishop extends Piece {
+public class Rook extends Piece {
 
-    private final static int[] POSSIBLE_MOVES = { -8, -1, 1, 8 };
+    private final static int[] POSSIBLE_MOVES = { -9, -7, 7, 9 };
 
-    public Bishop(int position, Team team) {
+    public Rook(int position, Team team) {
         super(position, team);
     }
 
     @Override
-    public Collection<Move> calculateLegalMoves(final Board board) {
+    public Collection<Move> calculateLegalMoves(Board board) {
 
         final List<Move> legalMoves = new ArrayList<>();
 
@@ -49,9 +49,9 @@ public class Bishop extends Piece {
     }
 
     private static boolean isFirstColumnExclusion(final int position, final int move) {
-        return BoardUtils.FIRST_COLUMN[position] && (move == -1);
+        return BoardUtils.FIRST_COLUMN[position] && (move == -9 || move == 7);
     }
     private static boolean isEighthColumnExclusion(final int position, final int move) {
-        return BoardUtils.EIGHTH_COLUMN[position] && (move == 1);
+        return BoardUtils.EIGHTH_COLUMN[position] && (move == 9 || move == -7);
     }
 }
