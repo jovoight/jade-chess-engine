@@ -34,7 +34,7 @@ public class Queen extends Piece {
                 destination += move;
                 if (BoardUtils.isValidDestination(destination)) {
                     // check if occupied
-                    final Square destinationSquare = Board.getSquare(destination);
+                    final Square destinationSquare = board.getSquare(destination);
                     if (!destinationSquare.isOccupied()) { legalMoves.add(new NormalMove(board, this, destination)); }
                     else {
                         final Piece occupier = destinationSquare.getPiece();

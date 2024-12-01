@@ -16,7 +16,7 @@ public class King extends Piece {
 
     private final static int[] POSSIBLE_MOVES = { -9, -8, -7, -1, 1, 7, 8, 9 };
 
-    King(int position, Team team) {
+    public King(int position, Team team) {
         super(position, team);
     }
 
@@ -34,7 +34,7 @@ public class King extends Piece {
                     || isEighthColumnExclusion(this.position, move)
                 ) { continue; }
                 // check if occupied
-                final Square destinationSquare = Board.getSquare(destination);
+                final Square destinationSquare = board.getSquare(destination);
                 if (!destinationSquare.isOccupied()) { legalMoves.add(new NormalMove(board, this, destination)); }
                 else {
                     final Piece occupier = destinationSquare.getPiece();
