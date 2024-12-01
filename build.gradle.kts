@@ -8,7 +8,7 @@ version = "1.0-SNAPSHOT"
 
 repositories { mavenCentral() }
 
-application { mainClass.set("jade.Square") }
+application { mainClass.set("jade.Main") }
 
 dependencies {
     implementation("com.google.guava:guava:33.3.1-jre")

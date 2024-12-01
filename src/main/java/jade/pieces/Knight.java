@@ -58,4 +58,7 @@ public class Knight extends Piece {
     private static boolean isEighthColumnExclusion(final int position, final int move) {
         return BoardUtils.EIGHTH_COLUMN[position] && (move == 17 || move == 10 || move == -6 || move == -15);
     }
+
+    @Override
+    public String toString() { return PieceType.KNIGHT.toString(); }
 }

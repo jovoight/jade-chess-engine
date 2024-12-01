@@ -52,4 +52,7 @@ public class Bishop extends Piece {
     private static boolean isEighthColumnExclusion(final int position, final int move) {
         return BoardUtils.EIGHTH_COLUMN[position] && (move == 9 || move == -7);
     }
+
+    @Override
+    public String toString() { return PieceType.BISHOP.toString(); }
 }

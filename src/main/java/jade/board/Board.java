@@ -4,10 +4,7 @@ import com.google.common.collect.ImmutableList;
 import jade.Team;
 import jade.pieces.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Board {
 
@@ -19,6 +16,26 @@ public class Board {
         this.squares = populateSquares(builder);
         this.whitePieces = getActivePieces(this.squares, Team.WHITE);
         this.blackPieces = getActivePieces(this.squares, Team.BLACK);
+
+        final Collection<Move> whiteLegalMoves = calculateLegalMoves(this.whitePieces);
+        final Collection<Move> blackLegalMoves = calculateLegalMoves(this.blackPieces);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < 64; i++) {
+            final String squareString = squares.get(i).toString();
+            builder.append(String.format("%3s", squareString));
+            if ((i + 1) % 8 == 0) { builder.append("\n"); }
+        }
+        return builder.toString();
+    }
+
+    private Collection<Move> calculateLegalMoves(Collection<Piece> pieces) {
+        final List<Move> legalMoves = new ArrayList<>();
+        for (Piece piece : pieces) { legalMoves.addAll(piece.calculateLegalMoves(this)); }
+        return ImmutableList.copyOf(legalMoves);
     }
 
     public Square getSquare(final int index) {
@@ -93,7 +110,7 @@ public class Board {
         Map<Integer, Piece> boardConfig;
         Team turn;
 
-        public BoardBuilder() {}
+        public BoardBuilder() { boardConfig = new HashMap<>(); }
 
         public BoardBuilder setPiece(final Piece piece) { this.boardConfig.put(piece.getPosition(), piece); return this; }
         public BoardBuilder setTurn(final Team turn) { this.turn = turn; return this; }

@@ -52,4 +52,7 @@ public class Rook extends Piece {
     private static boolean isEighthColumnExclusion(final int position, final int move) {
         return BoardUtils.EIGHTH_COLUMN[position] && (move == 1);
     }
+
+    @Override
+    public String toString() { return PieceType.ROOK.toString(); }
 }

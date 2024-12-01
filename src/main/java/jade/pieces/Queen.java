@@ -53,4 +53,7 @@ public class Queen extends Piece {
     private static boolean isEighthColumnExclusion(final int position, final int move) {
         return BoardUtils.EIGHTH_COLUMN[position] && (move == -7 || move == 1 || move == 9);
     }
+
+    @Override
+    public String toString() { return PieceType.QUEEN.toString(); }
 }

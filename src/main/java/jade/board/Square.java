@@ -41,6 +41,8 @@ public abstract class Square {
         public boolean isOccupied() { return false; }
         @Override
         public Piece getPiece() { return null; }
+        @Override
+        public String toString() { return "-"; }
     }
 
     // occupied square subclass
@@ -53,6 +55,11 @@ public abstract class Square {
         @Override
         public boolean isOccupied() { return true; }
         @Override
-        public Piece getPiece() { return this.piece; }
+        public Piece getPiece() { return piece; }
+        @Override
+        public String toString() {
+            final Piece piece = getPiece();
+            return piece.getTeam().isWhite() ? piece.toString() : piece.toString().toLowerCase();
+        }
     }
 }
