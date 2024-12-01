@@ -21,10 +21,10 @@ public class Pawn extends Piece {
 
     @Override
     public Collection<Move> calculateLegalMoves(Board board) {
-        List<Move> legalMoves = new ArrayList<>();
+        final List<Move> legalMoves = new ArrayList<>();
 
         for (final int move : POSSIBLE_MOVES) {
-            int destination = this.position + this.getTeam().getDirection() * move;
+            final int destination = this.position + this.getTeam().getDirection() * move;
             if (!BoardUtils.isValidDestination(destination)) { continue; }
             // TODO: change to PawnMove class
             // normal single square move
@@ -49,9 +49,7 @@ public class Pawn extends Piece {
                 && board.getSquare(destination).isOccupied()
             ) {
                 final Piece occupier = board.getSquare(destination).getPiece();
-                if (occupier.getTeam() != this.getTeam()) {
-                    legalMoves.add(new Capture(board, this, destination, occupier));
-                }
+                if (occupier.getTeam() != this.getTeam()) { legalMoves.add(new Capture(board, this, destination, occupier)); }
             }
         }
         return ImmutableList.copyOf(legalMoves);

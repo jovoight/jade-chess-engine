@@ -1,5 +1,6 @@
 package jade.pieces;
 
+import com.google.common.collect.ImmutableList;
 import jade.Team;
 import jade.board.Board;
 import jade.board.BoardUtils;
@@ -43,7 +44,7 @@ public class Queen extends Piece {
                 }
             }
         }
-        return legalMoves;
+        return ImmutableList.copyOf(legalMoves);
     }
 
     private static boolean isFirstColumnExclusion(final int position, final int move) {
