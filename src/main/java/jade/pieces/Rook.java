@@ -15,7 +15,7 @@ public class Rook extends Piece {
 
     private final static int[] POSSIBLE_MOVES = { -8, -1, 1, 8 };
 
-    public Rook(int position, Team team) { super(position, team); }
+    public Rook(int position, Team team) { super(position, team, PieceType.ROOK); }
 
     @Override
     public Collection<Move> calculateLegalMoves(Board board) {

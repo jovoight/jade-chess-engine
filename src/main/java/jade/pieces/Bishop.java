@@ -15,7 +15,7 @@ public class Bishop extends Piece {
 
     private final static int[] POSSIBLE_MOVES = { -9, -7, 7, 9 };
 
-    public Bishop(int position, Team team) { super(position, team); }
+    public Bishop(int position, Team team) { super(position, team, PieceType.BISHOP); }
 
     @Override
     public Collection<Move> calculateLegalMoves(final Board board) {

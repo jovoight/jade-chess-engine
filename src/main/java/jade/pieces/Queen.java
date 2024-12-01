@@ -16,7 +16,7 @@ public class Queen extends Piece {
 
     private final static int[] POSSIBLE_MOVES = { -9, -8, -7, -1, 1, 7, 8, 9 };
 
-    public Queen(int position, Team team) { super(position, team); }
+    public Queen(int position, Team team) { super(position, team, PieceType.QUEEN); }
 
     @Override
     public Collection<Move> calculateLegalMoves(Board board) {

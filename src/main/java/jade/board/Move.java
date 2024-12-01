@@ -13,10 +13,13 @@ public abstract class Move {
         this.destination = destination;
     }
 
+    public int getDestination() { return destination; }
+    public abstract Board execute();
+
     public static final class NormalMove extends Move {
-        public NormalMove(final Board board, final Piece piece, final int destination) {
-            super(board, piece, destination);
-        }
+        public NormalMove(final Board board, final Piece piece, final int destination) { super(board, piece, destination); }
+        @Override
+        public Board execute() { return null; }
     }
 
     public static final class Capture extends Move {
@@ -25,5 +28,7 @@ public abstract class Move {
             super(board, piece, destination);
             this.captured = captured;
         }
+        @Override
+        public Board execute() { return null; }
     }
 }

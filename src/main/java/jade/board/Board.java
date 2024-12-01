@@ -3,6 +3,9 @@ package jade.board;
 import com.google.common.collect.ImmutableList;
 import jade.Team;
 import jade.pieces.*;
+import jade.players.BlackPlayer;
+import jade.players.Player;
+import jade.players.WhitePlayer;
 
 import java.util.*;
 
@@ -11,14 +14,20 @@ public class Board {
     private final List<Square> squares;
     private final Collection<Piece> whitePieces;
     private final Collection<Piece> blackPieces;
+    private final WhitePlayer whitePlayer;
+    private final BlackPlayer blackPlayer;
+    private final Player activePlayer;
 
     private Board(BoardBuilder builder) {
-        this.squares = populateSquares(builder);
-        this.whitePieces = getActivePieces(this.squares, Team.WHITE);
-        this.blackPieces = getActivePieces(this.squares, Team.BLACK);
+        squares = populateSquares(builder);
+        whitePieces = getActivePieces(squares, Team.WHITE);
+        blackPieces = getActivePieces(squares, Team.BLACK);
 
-        final Collection<Move> whiteLegalMoves = calculateLegalMoves(this.whitePieces);
-        final Collection<Move> blackLegalMoves = calculateLegalMoves(this.blackPieces);
+        final Collection<Move> whiteLegalMoves = calculateLegalMoves(whitePieces);
+        final Collection<Move> blackLegalMoves = calculateLegalMoves(blackPieces);
+        whitePlayer = new WhitePlayer(this, whiteLegalMoves, blackLegalMoves);
+        blackPlayer = new BlackPlayer(this, whiteLegalMoves, blackLegalMoves);
+        activePlayer = null;
     }
 
     @Override
@@ -38,9 +47,8 @@ public class Board {
         return ImmutableList.copyOf(legalMoves);
     }
 
-    public Square getSquare(final int index) {
-        return squares.get(index);
-    }
+    public Square getSquare(final int index) { return squares.get(index); }
+    public Player getActivePlayer() { return activePlayer; }
 
     private static List<Square> populateSquares(final BoardBuilder builder) {
         final Square[] squares = new Square[64];
@@ -58,6 +66,11 @@ public class Board {
         }
         return ImmutableList.copyOf(activePieces);
     }
+
+    public Collection<Piece> getWhitePieces() { return whitePieces; }
+    public Collection<Piece> getBlackPieces() { return blackPieces; }
+    public WhitePlayer getWhitePlayer() { return whitePlayer; }
+    public BlackPlayer getBlackPlayer() { return blackPlayer; }
 
     public static Board buildStandardBoard() {
 
